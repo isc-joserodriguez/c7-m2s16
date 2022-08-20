@@ -9,7 +9,6 @@
  * 6.- Importar servicios
  * 7.- Ejecutamos servicios y exportamos resultado
  * 8.- Usar servicios
- * 9.-
  */
 
 import { initializeApp } from "firebase/app";

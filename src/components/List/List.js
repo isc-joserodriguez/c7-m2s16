@@ -1,5 +1,9 @@
-const List = () => {
-  return <h1>List</h1>;
+const List = ({ peliculas }) => {
+  return peliculas.map((pelicula, key) => (
+    <li key={key}>
+      {pelicula.name} - {pelicula.year}
+    </li>
+  ));
 };
 
 export default List;
