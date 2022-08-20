@@ -16,12 +16,12 @@ import { getFirestore } from "firebase/firestore";
 //import { get<Servicio> } from "firebase/<servicio>";
 
 initializeApp({
-  apiKey: "AIzaSyCc2AVShpSSriFZ4n2vmBzw_kfYxEK8nsE",
-  authDomain: "peliculas-b0dde.firebaseapp.com",
-  projectId: "peliculas-b0dde",
-  storageBucket: "peliculas-b0dde.appspot.com",
-  messagingSenderId: "632078679828",
-  appId: "1:632078679828:web:2d5f63ad57e32f53c10c01",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 });
 
 export const db = getFirestore();
