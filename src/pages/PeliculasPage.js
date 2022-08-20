@@ -1,5 +1,14 @@
+
+import List from "../components/List/List";
+import Form from "../components/Form/Form";
+
 const PeliculasPage = () => {
-  return <h1>PeliculasPage</h1>;
+  return (
+    <>
+      <Form />
+      <List />
+    </>
+  );
 };
 
 export default PeliculasPage;
