@@ -1,5 +1,12 @@
-import { useState } from "react";
-import { getDocs, collection, onSnapshot } from "firebase/firestore";
+import { useState, useEffect } from "react";
+import {
+  doc,
+  collection,
+  getDocs,
+  onSnapshot,
+  addDoc,
+  setDoc,
+} from "firebase/firestore";
 
 import { db } from "../firebase";
 
@@ -16,16 +23,30 @@ const PeliculasPage = () => {
 
   const listenPeliculas = () => {
     onSnapshot(REF_COLLECTION, (snapshot) => {
-      snapshot.docs.forEach((pelicula) => console.log(pelicula.data()));
+      const peliculas = [];
+      snapshot.docs.forEach((pelicula) => {
+        peliculas.push({
+          ...pelicula.data(),
+          id: pelicula?.id,
+        });
+      });
+      setPeliculas(peliculas);
     });
   };
 
-  listenPeliculas();
+  const agregarPelicula = async (pelicula) => addDoc(REF_COLLECTION, pelicula);
+
+  const editarPelicula = async (id, pelicula) =>
+    setDoc(doc(db, "peliculas", id), pelicula);
+
+  useEffect(() => {
+    listenPeliculas();
+  }, []);
 
   return (
     <>
-      <Form />
-      <List peliculas={peliculas} />
+      <Form agregarPelicula={agregarPelicula} />
+      <List peliculas={peliculas} editarPelicula={editarPelicula} />
     </>
   );
 };
