@@ -1,4 +1,6 @@
-import { Button, Card } from "react-bootstrap";
+/* import { Otro, Card } from "react-bootstrap"; */
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 
 const List = ({ peliculas, editarPelicula }) => {
   const onClicked = (id) => {
