@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 
 const List = ({ peliculas, editarPelicula }) => {
   const onClicked = (id) => {
@@ -9,12 +9,15 @@ const List = ({ peliculas, editarPelicula }) => {
     editarPelicula(id, updatedPelicula);
   };
   return peliculas.map((pelicula, key) => (
-    <li key={key}>
-      {pelicula.name} - {pelicula.year}
-      <Button variant="warning" onClick={() => onClicked(pelicula.id)}>
-        Editar
-      </Button>
-    </li>
+    <Card style={{ width: "15rem", display:"inline-block"}} key={key}>
+      <Card.Body>
+        <Card.Title>{pelicula.name}</Card.Title>
+        <Card.Text>{pelicula.year}</Card.Text>
+        <Button variant="warning" onClick={() => onClicked(pelicula.id)}>
+          Editar
+        </Button>
+      </Card.Body>
+    </Card>
   ));
 };
 
