@@ -23,4 +23,16 @@ const List = ({ peliculas, editarPelicula }) => {
   ));
 };
 
+/* 
+<div className="card" style={{ width: "15rem", display: "inline-block" }}>
+      <div className="card-body">
+        <div className="card-title h5">nuevo</div>
+        <p className="card-text">1233</p>
+        <button type="button" className="btn btn-warning">
+          Editar
+        </button>
+      </div>
+    </div>
+*/
+
 export default List;
