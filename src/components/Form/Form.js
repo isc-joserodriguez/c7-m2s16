@@ -1,4 +1,5 @@
 import { Button, Form } from "react-bootstrap";
+import { Store } from "react-notifications-component";
 
 const FormComponent = ({
   agregarPelicula,
@@ -23,15 +24,51 @@ const FormComponent = ({
   const onSubmited = (event) => {
     event.preventDefault();
     if (!pelicula.name || !pelicula.year) {
-      alert("Se requieren datos...");
+      Store.addNotification({
+        title: "Error",
+        message: "Se requieren datos...",
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+      });
       return;
     }
     if (editMode) {
       editarPelicula(pelicula);
-      alert("Se editó la pelicula");
+      Store.addNotification({
+        title: "Éxito!",
+        message: "Se editó la pelicula correctamente!",
+        type: "success",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+      });
     } else {
       agregarPelicula(pelicula);
-      alert("Se agregó la pelicula");
+      Store.addNotification({
+        title: "Éxito!",
+        message: "Se agregó la pelicula correctamente!",
+        type: "success",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+      });
     }
     resetPelicula();
   };

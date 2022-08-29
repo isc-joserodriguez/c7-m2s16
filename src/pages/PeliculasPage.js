@@ -13,6 +13,7 @@ import { db } from "../firebase";
 
 import List from "../components/List/List";
 import Form from "../components/Form/Form";
+import { Store } from "react-notifications-component";
 
 const PeliculasPage = () => {
   const [pelicula, setPelicula] = useState({
@@ -51,7 +52,6 @@ const PeliculasPage = () => {
         });
       });
       setPeliculas(peliculas);
-      alert("Se actualizaron las películas correctamente");
     });
   };
 
@@ -70,6 +70,19 @@ const PeliculasPage = () => {
 
   useEffect(() => {
     listenPeliculas();
+    Store.addNotification({
+      title: "Éxito",
+      message: "Se obtuvieron las películas correctamente",
+      type: "info",
+      insert: "top",
+      container: "top-right",
+      animationIn: ["animate__animated", "animate__fadeIn"],
+      animationOut: ["animate__animated", "animate__fadeOut"],
+      dismiss: {
+        duration: 5000,
+        onScreen: true,
+      },
+    });
   }, []);
 
   return (

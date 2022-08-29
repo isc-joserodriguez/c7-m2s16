@@ -1,6 +1,7 @@
 /* import { Otro, Card } from "react-bootstrap"; */
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { Store } from "react-notifications-component";
 
 const List = ({ peliculas, updatePelicula, editModeOn, eliminarPelicula }) => {
   const onClicked = (pelicula) => {
@@ -8,8 +9,23 @@ const List = ({ peliculas, updatePelicula, editModeOn, eliminarPelicula }) => {
     editModeOn();
   };
   const onDelete = (id) => {
+    if (!window.confirm("Seguro que quiere eliminar")) {
+      return;
+    }
     eliminarPelicula(id);
-    alert("Se eliminó correctamente");
+    Store.addNotification({
+      title: "Éxito!",
+      message: "Se eliminó la pelicula correctamente!",
+      type: "success",
+      insert: "top",
+      container: "top-right",
+      animationIn: ["animate__animated", "animate__fadeIn"],
+      animationOut: ["animate__animated", "animate__fadeOut"],
+      dismiss: {
+        duration: 5000,
+        onScreen: true,
+      },
+    });
   };
   return peliculas.map((pelicula, key) => (
     <Card style={{ width: "15rem", display: "inline-block" }} key={key}>
