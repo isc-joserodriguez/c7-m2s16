@@ -6,6 +6,7 @@ import {
   onSnapshot,
   addDoc,
   setDoc,
+  deleteDoc,
 } from "firebase/firestore";
 
 import { db } from "../firebase";
@@ -50,16 +51,22 @@ const PeliculasPage = () => {
         });
       });
       setPeliculas(peliculas);
+      alert("Se actualizaron las películas correctamente");
     });
   };
 
-  const agregarPelicula = async (pelicula) => addDoc(REF_COLLECTION, pelicula);
+  const agregarPelicula = (pelicula) => addDoc(REF_COLLECTION, pelicula);
 
-  const editarPelicula = async (pelicula) =>
+  const editarPelicula = (pelicula) =>
     setDoc(doc(db, "peliculas", pelicula.id), {
       name: pelicula.name,
       year: pelicula.year,
     });
+
+  const eliminarPelicula = (id) => {
+    deleteDoc(doc(db, "peliculas", id));
+    resetPelicula();
+  };
 
   useEffect(() => {
     listenPeliculas();
@@ -79,6 +86,7 @@ const PeliculasPage = () => {
         peliculas={peliculas}
         updatePelicula={updatePelicula}
         editModeOn={editModeOn}
+        eliminarPelicula={eliminarPelicula}
       />
     </>
   );

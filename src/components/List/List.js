@@ -2,10 +2,14 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-const List = ({ peliculas, updatePelicula, editModeOn }) => {
+const List = ({ peliculas, updatePelicula, editModeOn, eliminarPelicula }) => {
   const onClicked = (pelicula) => {
     updatePelicula(pelicula);
     editModeOn();
+  };
+  const onDelete = (id) => {
+    eliminarPelicula(id);
+    alert("Se eliminó correctamente");
   };
   return peliculas.map((pelicula, key) => (
     <Card style={{ width: "15rem", display: "inline-block" }} key={key}>
@@ -14,6 +18,9 @@ const List = ({ peliculas, updatePelicula, editModeOn }) => {
         <Card.Text>{pelicula.year}</Card.Text>
         <Button variant="warning" onClick={() => onClicked(pelicula)}>
           Editar
+        </Button>
+        <Button variant="danger" onClick={() => onDelete(pelicula.id)}>
+          Eliminar
         </Button>
       </Card.Body>
     </Card>
