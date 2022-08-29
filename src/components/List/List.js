@@ -2,20 +2,17 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-const List = ({ peliculas, editarPelicula }) => {
-  const onClicked = (id) => {
-    const updatedPelicula = {
-      name: prompt("Nombre de la pelicula"),
-      year: prompt("Año"),
-    };
-    editarPelicula(id, updatedPelicula);
+const List = ({ peliculas, updatePelicula, editModeOn }) => {
+  const onClicked = (pelicula) => {
+    updatePelicula(pelicula);
+    editModeOn();
   };
   return peliculas.map((pelicula, key) => (
-    <Card style={{ width: "15rem", display:"inline-block"}} key={key}>
+    <Card style={{ width: "15rem", display: "inline-block" }} key={key}>
       <Card.Body>
         <Card.Title>{pelicula.name}</Card.Title>
         <Card.Text>{pelicula.year}</Card.Text>
-        <Button variant="warning" onClick={() => onClicked(pelicula.id)}>
+        <Button variant="warning" onClick={() => onClicked(pelicula)}>
           Editar
         </Button>
       </Card.Body>
