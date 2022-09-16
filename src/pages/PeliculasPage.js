@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import {
   doc,
   collection,
-  getDocs,
+  /* getDocs, */
   onSnapshot,
   addDoc,
   setDoc,
@@ -24,10 +24,10 @@ const PeliculasPage = () => {
   const [peliculas, setPeliculas] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const REF_COLLECTION = collection(db, "peliculas");
-  const getAllPeliculas = async () => {
+  /* const getAllPeliculas = async () => {
     const snapshot = await getDocs(REF_COLLECTION);
     snapshot.docs.forEach((pelicula) => console.log(pelicula.data()));
-  };
+  }; */
 
   const editModeOn = () => setEditMode(true);
 
@@ -43,17 +43,17 @@ const PeliculasPage = () => {
   const updatePelicula = (pelicula) => setPelicula(pelicula);
 
   const listenPeliculas = () => {
-    onSnapshot(REF_COLLECTION, (snapshot) => {
-      const peliculas = [];
-      snapshot.docs.forEach((pelicula) => {
-        peliculas.push({
-          ...pelicula.data(),
-          id: pelicula?.id,
+      onSnapshot(REF_COLLECTION, (snapshot) => {
+        const peliculas = [];
+        snapshot.docs.forEach((pelicula) => {
+          peliculas.push({
+            ...pelicula.data(),
+            id: pelicula?.id,
+          });
         });
+        setPeliculas(peliculas);
       });
-      setPeliculas(peliculas);
-    });
-  };
+    };
 
   const agregarPelicula = (pelicula) => addDoc(REF_COLLECTION, pelicula);
 
@@ -83,6 +83,7 @@ const PeliculasPage = () => {
         onScreen: true,
       },
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
